@@ -1,4 +1,4 @@
-# ![](https://img.itch.zone/aW1nLzM4NzgxODgucG5n/original/riTMp5.png)
+# Cursor Custodian
 
 Cursor Custodian is a game created in 48 hours for the [2020 GMTK Game Jam](https://itch.io/jam/gmtk-2020) using C++ and [SDL2](https://www.libsdl.org/). It can be played in your web browser [here](https://polymars.itch.io/cursor-custodian).
 ## Screenshots
