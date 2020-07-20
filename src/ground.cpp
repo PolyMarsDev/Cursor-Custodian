@@ -88,6 +88,7 @@ void Ground::update(int score)
 				groundTiles[i].setStatus(1, groundTex);
 				lastStatus = 1;
 				holeCount = 0;
+				break;
 			} 
 			case 1:
 			{
@@ -95,12 +96,14 @@ void Ground::update(int score)
 				groundTiles[i].setStatus(randomInt, groundTex);
 				lastStatus = randomInt;
 				holeCount = 0;
+				break;
 			} 
 			case 2:
 			{
 				groundTiles[i].setStatus(3, groundTex);
 				lastStatus = 3;
 				holeCount = 0;
+				break;
 			} 
 			case 3:
 			{
@@ -120,6 +123,7 @@ void Ground::update(int score)
 				}
 				groundTiles[i].setStatus(randomInt, groundTex);
 				lastStatus = randomInt;
+				break;
 			}
 			}
 		}
