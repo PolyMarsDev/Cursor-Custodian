@@ -19,3 +19,13 @@ objCompile:
 	${CC} ./src/*.cpp ${CFLAGSO}
 	# laymans way to move object files to make/build folder 
 	mv *.o ./make/build
+windows: winObjCompile
+	mkdir -p ./make/bin
+	${CC} ./make/build/*.o -o ./make/bin/main ${CFLAGSB} -mwindows
+	cp -r ./res ./make/bin/res
+
+winObjCompile: 
+	mkdir -p ./make/build
+	${CC} ./src/*.cpp ${CFLAGSO} -mwindows
+	# laymans way to move object files to make/build folder 
+	mv *.o ./make/build
