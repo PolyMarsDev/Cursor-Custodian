@@ -17,5 +17,5 @@ default: objCompile
 objCompile: 
 	mkdir -p ./make/build
 	${CC} ./src/*.cpp ${CFLAGSO}
-	# laymans fix
+	# laymans way to move object files to make/build folder 
 	mv *.o ./make/build
