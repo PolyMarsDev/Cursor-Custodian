@@ -23,12 +23,24 @@ After installing the dev packages of SDL2 for your distribution, execute the fol
 g++ -c src/*.cpp -std=c++14 -O3 -Wall -m64 -I include && mkdir -p bin/release && g++ *.o -o bin/release/main -s -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 ```
 The compiled binary ``main`` is located in ``./bin``. For it to run, you must copy the ``./res`` folder to its directory.
+
 ### Web
 Install [emscripten](https://emscripten.org/docs/getting_started/downloads.html) and execute the following command in the project's root directory:
 ```
 emcc src/main.cpp src/entity.cpp src/renderwindow.cpp src/player.cpp src/ground.cpp src/groundtile.cpp -I include -O2 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s \"SDL2_IMAGE_FORMATS=['png']\" -s USE_SDL_TTF=2 -s USE_SDL_MIXER=2 --preload-file res -o index.html
 ```
+
+You can also just run `make web` to achieve the same compilation.
+
 The compiled ``.js``, ``.wasm``, ``.data``, and ``.html`` files are located in the project's root.
+
+You can use `python` to run a server on localhost port 8000 like so:
+
+```
+python -m SimpleHTTPServer
+```
+
+and visit [http://localhost:8000](http://localhost:8000) to run the game in the browser.
 
 
 ## Contributing

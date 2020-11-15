@@ -1,0 +1,9 @@
+# IDE Files
+.vscode/
+
+# emscripten-generated files
+index.data
+index.html
+index.js
+index.wasm
+

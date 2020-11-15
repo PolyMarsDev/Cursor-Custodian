@@ -29,3 +29,7 @@ winObjCompile:
 	${CC} ./src/*.cpp ${CFLAGSO} -mwindows
 	# laymans way to move object files to make/build folder 
 	mv *.o ./make/build
+
+web:
+	em++ -std=c++14 -Wall src/main.cpp src/entity.cpp src/renderwindow.cpp src/player.cpp src/ground.cpp src/groundtile.cpp -I include -O2 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS=\['png'\] -s USE_SDL_TTF=2 -s USE_SDL_MIXER=2 --preload-file res -o index.html
+
