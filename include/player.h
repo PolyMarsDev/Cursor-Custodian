@@ -14,8 +14,8 @@ public:
 	float distanceFromCursor();
 	bool jump();
 	void update(Ground& ground);
-	const char* getScore();
-	const char* getHighscore();
+	std::string getScore();
+	std::string getHighscore();
 	int getScoreInt();
 	int isDead();
 	void reset();

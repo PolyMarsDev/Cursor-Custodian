@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "player.h"
 #include "entity.h"
@@ -11,7 +12,6 @@
 const float GRAVITY = 0.09f;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 480;
-const int ALIVE = 0;
 const int CURSOR_DEATH = 1;
 const int HOLE_DEATH = 2;
 
@@ -138,18 +138,18 @@ void Player::update(Ground& ground)
 	
 }
 
-const char* Player::getScore()
+std::string Player::getScore()
 {
 	std::string s = std::to_string(score);
 	s = "DISTANCE: " + s;
-	return s.c_str();
+	return s;
 }
 
-const char* Player::getHighscore()
+std::string Player::getHighscore()
 {
 	std::string s = std::to_string(highscore);
 	s = "BEST: " + s;
-	return s.c_str();
+	return s;
 }
 
 int Player::getScoreInt()

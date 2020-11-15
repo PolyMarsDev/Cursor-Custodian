@@ -86,7 +86,7 @@ void RenderWindow::render(SDL_Texture* p_tex)
 
 void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
 {
-		SDL_Surface* surfaceMessage = TTF_RenderText_Blended( font, p_text, textColor);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, p_text, textColor);
 		SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
 		SDL_Rect src;
