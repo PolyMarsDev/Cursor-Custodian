@@ -1,6 +1,6 @@
 #pragma once
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <vector>
 #include <string>
 
@@ -17,7 +17,8 @@ public:
 	const char* getScore();
 	const char* getHighscore();
 	int getScoreInt();
-	int isDead();
+	int getDeadType();
+	bool isDead();
 	void reset();
 private:
 	float velocityX, velocityY;
