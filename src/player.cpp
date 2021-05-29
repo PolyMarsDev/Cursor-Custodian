@@ -107,9 +107,14 @@ void Player::update(Ground& ground)
 	{
 		velocityX = 0;
 	}
-	setX(getX() + velocityX);
 
 	setY(getY() + velocityY);
+
+	//don't go into the ground if a an edge of a pit:
+	if (grounded || (getY() + getHeight()) < (SCREEN_HEIGHT - 64)) {
+		setX(getX() + velocityX);
+	}
+
 	if (ground.isTileBelow(getX(), getWidth()))
 	{
 		if (getY() + getHeight() < SCREEN_HEIGHT - 64)
