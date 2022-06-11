@@ -138,18 +138,18 @@ void Player::update(Ground& ground)
 	
 }
 
-const char* Player::getScore()
+std::string Player::getScore()
 {
 	std::string s = std::to_string(score);
 	s = "DISTANCE: " + s;
-	return s.c_str();
+	return s;
 }
 
-const char* Player::getHighscore()
+std::string Player::getHighscore()
 {
 	std::string s = std::to_string(highscore);
 	s = "BEST: " + s;
-	return s.c_str();
+	return s;
 }
 
 int Player::getScoreInt()
