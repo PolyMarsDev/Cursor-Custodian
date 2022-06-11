@@ -26,8 +26,6 @@ const int ALIVE = 0;
 const int CURSOR_DEATH = 1;
 const int HOLE_DEATH = 2;
 
-const Uint8 *keyState;
-
 RenderWindow window;
 
 std::vector<SDL_Texture*> playerTex; 
@@ -199,11 +197,15 @@ void gameLoop()
 		{
 			window.render(ground.getTile(i));
 		}
+		
+		std::string playerScore = player.getScore();
+		std::string playerHighScore = player.getHighscore();
+		
 		window.render(25, 30, arrow);
-		window.render(62, 20, player.getScore(), font32_outline, black);
-		window.render(65, 23, player.getScore(), font32, white);
+		window.render(62, 20, playerScore.c_str(), font32_outline, black);
+		window.render(65, 23, playerScore.c_str(), font32, white);
 		window.render(0, 65, highscoreBox);
-		window.render(65, 64, player.getHighscore(), font16, white);
+		window.render(65, 64, playerHighScore.c_str(), font16, white);
 
 		if (player.isDead() != ALIVE)
 		{
