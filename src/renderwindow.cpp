@@ -103,6 +103,7 @@ void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* fo
 
 		SDL_RenderCopy(renderer, message, &src, &dst);
 		SDL_FreeSurface(surfaceMessage);
+		SDL_DestroyTexture(message);
 }
 
 void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
@@ -124,6 +125,7 @@ void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Fo
 
 		SDL_RenderCopy(renderer, message, &src, &dst);
 		SDL_FreeSurface(surfaceMessage);
+		SDL_DestroyTexture(message);
 }
 
 void RenderWindow::display()
