@@ -4,10 +4,10 @@
 #endif
 
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -42,8 +42,8 @@ TTF_Font* font32_outline;
 TTF_Font* font24;
 TTF_Font* font16;
 
-SDL_Color white = { 255, 255, 255 };
-SDL_Color black = { 0, 0, 0 };
+SDL_Color white = { 255, 255, 255, 255 };
+SDL_Color black = { 0, 0, 0, 255 };
 
 Mix_Chunk* jumpSfx;
 Mix_Chunk* fallSfx;
@@ -85,7 +85,7 @@ bool init()
 	font32_outline = TTF_OpenFont("res/fonts/cocogoose.ttf", 32);
 	font24 = TTF_OpenFont("res/fonts/cocogoose.ttf", 24);
 	font16 = TTF_OpenFont("res/fonts/cocogoose.ttf", 16);
-	TTF_SetFontOutline(font32_outline, 3); 
+	TTF_SetFontOutline(font32_outline, 3);
 
 	jumpSfx = Mix_LoadWAV("res/sounds/jump.wav");
 	fallSfx = Mix_LoadWAV("res/sounds/fall.wav");
@@ -106,6 +106,7 @@ void reset()
 	player.reset();
 	ground.reset();
 }
+
 void gameLoop()
 {
 	SDL_Event event;
@@ -129,14 +130,14 @@ void gameLoop()
     		}
     		else 
     		{
-    			if (event.button.button == SDL_BUTTON_LEFT && player.isDead() == ALIVE)
+    			if (event.button.button == SDL_BUTTON_LEFT && player.getDeadType() == ALIVE)
     			{
 				if (player.jump())
 						{
 						Mix_PlayChannel(-1, jumpSfx, 0);
 					}
     			} 
-    			else if (player.isDead() != ALIVE)
+    			else if (player.isDead())
     			{
     				Mix_PlayChannel(-1, clickSfx, 0);
     				reset();
@@ -147,6 +148,7 @@ void gameLoop()
     	}
     	}
 	}
+
 	if (mainMenu)
 	{
 		if (SDL_GetTicks() < 2500)
@@ -171,21 +173,21 @@ void gameLoop()
 	}
 	else
 	{
-		if (player.isDead() != CURSOR_DEATH)
+		if (player.getDeadType() != CURSOR_DEATH)
 		{
 			ground.update(player.getScoreInt());
 		}
 
-		if (player.isDead() == ALIVE)
+		if (!player.isDead())
 		{
 			player.update(ground);
 		}
 		else if (!playedDeathSFX) {
-			if (player.isDead() == CURSOR_DEATH)
+			if (player.getDeadType() == CURSOR_DEATH)
 			{
 				Mix_PlayChannel(-1, hitSfx, 0);
 			} 
-			else if (player.isDead() == HOLE_DEATH)
+			else if (player.getDeadType() == HOLE_DEATH)
 			{
 				Mix_PlayChannel(-1, fallSfx, 0);
 			}
@@ -205,24 +207,28 @@ void gameLoop()
 		window.render(0, 65, highscoreBox);
 		window.render(65, 64, player.getHighscore(), font16, white);
 
-		if (player.isDead() != ALIVE)
+		if (player.isDead())
 		{
 			window.render(deathOverlay);
-			if (player.isDead() == CURSOR_DEATH)
+			
+			if (player.getDeadType() == CURSOR_DEATH)
 			{
 				window.renderCenter(0, -24, "The cursor is deadly to the player...", font24, white);
 			}
-			else if (player.isDead() == HOLE_DEATH)
+
+			else if (player.getDeadType() == HOLE_DEATH)
 			{
 				window.renderCenter(0, -24, "The hole had no bottom...", font24, white);
 			}
+			
 			window.renderCenter(0, 12, "Click to retry.", font16, white);
+			
 		}
 		window.display();
 	}
 }
 
-int main(int argc, char* args[])
+int main()
 {
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);

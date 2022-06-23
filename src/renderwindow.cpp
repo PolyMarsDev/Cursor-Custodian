@@ -1,6 +1,6 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
 
 #include "renderwindow.h"
@@ -103,6 +103,7 @@ void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* fo
 
 		SDL_RenderCopy(renderer, message, &src, &dst);
 		SDL_FreeSurface(surfaceMessage);
+		SDL_DestroyTexture(message);
 }
 
 void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
@@ -124,6 +125,7 @@ void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Fo
 
 		SDL_RenderCopy(renderer, message, &src, &dst);
 		SDL_FreeSurface(surfaceMessage);
+		SDL_DestroyTexture(message);
 }
 
 void RenderWindow::display()
@@ -134,4 +136,5 @@ void RenderWindow::display()
 void RenderWindow::cleanUp()
 {
 	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
 }

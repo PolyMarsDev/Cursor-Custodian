@@ -1,5 +1,5 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <cmath>
 #include <vector>
 #include <string>
@@ -140,15 +140,15 @@ void Player::update(Ground& ground)
 
 const char* Player::getScore()
 {
-	std::string s = std::to_string(score);
-	s = "DISTANCE: " + s;
+	static std::string s;
+	s = "DISTANCE: " + std::to_string(score);
 	return s.c_str();
 }
 
 const char* Player::getHighscore()
 {
-	std::string s = std::to_string(highscore);
-	s = "BEST: " + s;
+	static std::string s;
+	s = "BEST: " + std::to_string(highscore);
 	return s.c_str();
 }
 
@@ -157,9 +157,13 @@ int Player::getScoreInt()
 	return score;
 }
 
-int Player::isDead()
+int Player::getDeadType()
 {
 	return dead;
+}
+
+bool Player::isDead() {
+	return dead != ALIVE;
 }
 
 void Player::reset()
